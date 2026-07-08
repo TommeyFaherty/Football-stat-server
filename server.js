@@ -12,6 +12,10 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 app.get("/api/matches", async (req, res) => {
   const response = await fetch(
     "https://api.football-data.org/v4/competitions/WC/matches",
