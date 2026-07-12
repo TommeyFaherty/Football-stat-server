@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
-app.get("/health", (req, res) => {
+app.get("/healthCheck", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
@@ -76,11 +76,13 @@ app.get("/api/worldcup/matches", async (req, res) => {
     const today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
     var threeDaysAgo = new Date();
     threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+    threeDaysLater = new Date().setDate(threeDaysAgo.getDate() + 3);
     const startDate = threeDaysAgo.toISOString().split("T")[0];
+    const endDate = threeDaysLater.toISOString().split("T")[0];
 
     url.searchParams.append("season", "2026");
     url.searchParams.append("dateFrom", startDate);
-    url.searchParams.append("dateTo", today);
+    url.searchParams.append("dateTo", endDate);
 
     const response = await fetch(url, {
       headers: {
