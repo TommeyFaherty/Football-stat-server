@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
-app.get("/healthCheck", (req, res) => {
+app.get("/serverReady", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
